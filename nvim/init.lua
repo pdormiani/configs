@@ -88,27 +88,27 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 -- make missing : less annoying
 vim.keymap.set('n', ';', ':')
 -- Ctrl+j and Ctrl+k as Esc
-vim.keymap.set('n', '<C-j>', '<Esc>')
-vim.keymap.set('i', '<C-j>', '<Esc>')
-vim.keymap.set('v', '<C-j>', '<Esc>')
-vim.keymap.set('s', '<C-j>', '<Esc>')
-vim.keymap.set('x', '<C-j>', '<Esc>')
-vim.keymap.set('c', '<C-j>', '<Esc>')
-vim.keymap.set('o', '<C-j>', '<Esc>')
-vim.keymap.set('l', '<C-j>', '<Esc>')
-vim.keymap.set('t', '<C-j>', '<Esc>')
--- Ctrl-j is a little awkward unfortunately:
--- https://github.com/neovim/neovim/issues/5916
--- So we also map Ctrl+k
-vim.keymap.set('n', '<C-k>', '<Esc>')
-vim.keymap.set('i', '<C-k>', '<Esc>')
-vim.keymap.set('v', '<C-k>', '<Esc>')
-vim.keymap.set('s', '<C-k>', '<Esc>')
-vim.keymap.set('x', '<C-k>', '<Esc>')
-vim.keymap.set('c', '<C-k>', '<Esc>')
-vim.keymap.set('o', '<C-k>', '<Esc>')
-vim.keymap.set('l', '<C-k>', '<Esc>')
-vim.keymap.set('t', '<C-k>', '<Esc>')
+-- vim.keymap.set('n', '<C-j>', '<Esc>')
+-- vim.keymap.set('i', '<C-j>', '<Esc>')
+-- vim.keymap.set('v', '<C-j>', '<Esc>')
+-- vim.keymap.set('s', '<C-j>', '<Esc>')
+-- vim.keymap.set('x', '<C-j>', '<Esc>')
+-- vim.keymap.set('c', '<C-j>', '<Esc>')
+-- vim.keymap.set('o', '<C-j>', '<Esc>')
+-- vim.keymap.set('l', '<C-j>', '<Esc>')
+-- vim.keymap.set('t', '<C-j>', '<Esc>')
+-- -- Ctrl-j is a little awkward unfortunately:
+-- -- https://github.com/neovim/neovim/issues/5916
+-- -- So we also map Ctrl+k
+-- vim.keymap.set('n', '<C-k>', '<Esc>')
+-- vim.keymap.set('i', '<C-k>', '<Esc>')
+-- vim.keymap.set('v', '<C-k>', '<Esc>')
+-- vim.keymap.set('s', '<C-k>', '<Esc>')
+-- vim.keymap.set('x', '<C-k>', '<Esc>')
+-- vim.keymap.set('c', '<C-k>', '<Esc>')
+-- vim.keymap.set('o', '<C-k>', '<Esc>')
+-- vim.keymap.set('l', '<C-k>', '<Esc>')
+-- vim.keymap.set('t', '<C-k>', '<Esc>')
 -- Ctrl+h to stop searching
 vim.keymap.set('v', '<C-h>', '<cmd>nohlsearch<cr>')
 vim.keymap.set('n', '<C-h>', '<cmd>nohlsearch<cr>')
@@ -136,16 +136,29 @@ vim.keymap.set('n', '/', '/\\v')
 vim.keymap.set('c', '%s/', '%sm/')
 -- open new file adjacent to current file
 vim.keymap.set('n', '<leader>o', ':e <C-R>=expand("%:p:h") . "/" <cr>')
+-- make pane navigation easier
+vim.keymap.set('n', '<M-left>', '<C-\\><C-n><C-w>h')
+vim.keymap.set('n', '<M-down>', '<C-\\><C-n><C-w>j')
+vim.keymap.set('n', '<M-up>', '<C-\\><C-n><C-w>k')
+vim.keymap.set('n', '<M-right>', '<C-\\><C-n><C-w>l')
+vim.keymap.set('t', '<M-left>', '<C-\\><C-n><C-w>h')
+vim.keymap.set('t', '<M-down>', '<C-\\><C-n><C-w>j')
+vim.keymap.set('t', '<M-up>', '<C-\\><C-n><C-w>k')
+vim.keymap.set('t', '<M-right>', '<C-\\><C-n><C-w>l')
+vim.keymap.set('n', '<M-S-right>', '<C-w>3>')
+vim.keymap.set('n', '<M-S-left>', '<C-w>3<')
+vim.keymap.set('n', '<M-S-up>', '<C-w>3+')
+vim.keymap.set('n', '<M-S-down>', '<C-w>3-')
 -- no arrow keys --- force yourself to use the home row
-vim.keymap.set('n', '<up>', '<nop>')
-vim.keymap.set('n', '<down>', '<nop>')
-vim.keymap.set('i', '<up>', '<nop>')
-vim.keymap.set('i', '<down>', '<nop>')
-vim.keymap.set('i', '<left>', '<nop>')
-vim.keymap.set('i', '<right>', '<nop>')
+-- vim.keymap.set('n', '<up>', '<nop>')
+-- vim.keymap.set('n', '<down>', '<nop>')
+-- vim.keymap.set('i', '<up>', '<nop>')
+-- vim.keymap.set('i', '<down>', '<nop>')
+-- vim.keymap.set('i', '<left>', '<nop>')
+-- vim.keymap.set('i', '<right>', '<nop>')
 -- let the left and right arrows be useful: they can switch buffers
-vim.keymap.set('n', '<left>', ':bp<cr>')
-vim.keymap.set('n', '<right>', ':bn<cr>')
+vim.keymap.set('n', '<C-left>', ':bp<cr>')
+vim.keymap.set('n', '<C-right>', ':bn<cr>')
 -- make j and k move by visual line, not actual line, when text is soft-wrapped
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
@@ -249,7 +262,7 @@ require("lazy").setup({
 		lazy = false, -- load at start
 		priority = 1000, -- load first
 		config = function()
-			vim.cmd([[colorscheme gruvbox-dark-hard]])
+			vim.cmd([[colorscheme tomorrow-night-eighties]])
 			vim.o.background = 'dark'
 			-- XXX: hi Normal ctermbg=NONE
 			-- Make comments more prominent -- they are important.
@@ -273,6 +286,7 @@ require("lazy").setup({
 			-- no need to also show mode in cmd line when we have bar
 			vim.o.showmode = false
 			vim.g.lightline = {
+				colorscheme = "Tomorrow_Night_Eighties",
 				active = {
 					left = {
 						{ 'mode', 'paste' },
@@ -379,7 +393,7 @@ require("lazy").setup({
 						},
 						completion = {
 							postfix = {
-								enable = false,
+								enable = true,
 							},
 						},
 					},
@@ -472,7 +486,7 @@ require("lazy").setup({
 
 					-- None of this semantics tokens business.
 					-- https://www.reddit.com/r/neovim/comments/143efmd/is_it_possible_to_disable_treesitter_completely/
-					client.server_capabilities.semanticTokensProvider = nil
+					-- client.server_capabilities.semanticTokensProvider = nil
 				end,
 			})
 		end

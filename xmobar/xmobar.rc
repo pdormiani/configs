@@ -1,0 +1,39 @@
+Config { overrideRedirect = False
+       , font     = "xft:notosansmono-12"
+       , bgColor  = "#2d2d2d"
+       , fgColor  = "#cccccc"
+       , position = Static { xpos = 0,
+                             ypos = 1410,
+			     width = 3140,
+			     height = 30
+			},
+       , commands = [ Run Weather "KOAK"
+                        [ "--template", "<weather> <tempC>°C"
+                        , "-L", "0"
+                        , "-H", "25"
+                        , "--low"   , "lightblue"
+                        , "--normal", "#f8f8f2"
+                        , "--high"  , "red"
+                        ] 36000
+                    , Run Cpu
+                        [ "-L", "25"
+                        , "-H", "60"
+                        , "--high"  , "red"
+                        , "--normal", "green"
+                        ] 10
+                    , Run Alsa "default" "Master"
+                        [ "--template", "<volumestatus>"
+                        , "--suffix"  , "True"
+                        , "--"
+                        , "--on", ""
+                        ]
+                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %Y-%m-%d <fc=#f99157>%H:%M</fc>" "date" 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %KOAK% | %date% "
+       }
+
