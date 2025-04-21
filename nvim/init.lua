@@ -8,9 +8,13 @@ vim.g.mapleader = " "
 --
 -------------------------------------------------------------------------------
 -- never ever folding
-vim.opt.foldenable = false
-vim.opt.foldmethod = 'manual'
-vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevelstart = 1
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 4
+
 -- very basic "continue indent" mode (autoindent) is always on in neovim
 -- could try smartindent/cindent, but meh.
 -- vim.opt.cindent = true
